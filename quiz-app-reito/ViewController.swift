@@ -9,17 +9,25 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet var startButton:UIButton!
+    @IBOutlet var startButtonCenterConstraint:NSLayoutConstraint!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let screenWidth = view.frame.width
+        startButtonCenterConstraint.constant = -screenWidth
+        
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 2, delay: 0, options: [.curveLinear], animations: {
+            self.startButtonCenterConstraint.constant = 0
+            self.view.layoutIfNeeded()
+            print(self.startButtonCenterConstraint.constant)
+        })
     }
-
 
 }
 
